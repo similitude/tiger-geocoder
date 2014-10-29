@@ -49,7 +49,7 @@ RUN service postgresql start && \
         service postgresql stop
 
 # Clean up the data generation script.
-RUN sed 's/\s*+$//' /gisdata/temp.sh | tail -n +3 | head -n -1 > /gisdata/generate.sh
+RUN sed 's/\s*+$//' /gisdata/temp.sh | tail -n +3 | head -n -2 > /gisdata/generate.sh
 RUN rm /gisdata/temp.sh
 RUN chmod +x /gisdata/generate.sh
 
@@ -61,7 +61,7 @@ RUN service postgresql start && \
 
 # Check that it worked.
 RUN service postgresql start && \
-        psql -d geocoder -c "SELECT g.rating, ST_X(geomout) As lon, ST_Y(geomout) As lat, (addy).* FROM geocode('1731 New Hampshire Avenue Northwest, Washington, DC 20010', 1) As g;" && \
+        psql -d geocoder -c "SELECT g.rating, ST_X(geomout) As lon, ST_Y(geomout) As lat, (addy).* FROM geocode('Washington, DC 20010', 1) As g;" && \
         service postgresql stop
 
 
