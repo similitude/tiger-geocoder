@@ -1,4 +1,6 @@
 FROM postgis:2.1
+# Note: This is built from https://github.com/helmi03/docker-postgis.
+# The DockerHub build has an error.
 
 MAINTAINER Oliver Lade <piemaster21@gmail.com>
 # See https://www.census.gov/geo/maps-data/data/tiger-line.html
@@ -61,7 +63,7 @@ RUN service postgresql start && \
 
 # Check that it worked.
 RUN service postgresql start && \
-        psql -d geocoder -c "SELECT g.rating, ST_X(geomout) As lon, ST_Y(geomout) As lat, (addy).* FROM geocode('Washington, DC 20010', 1) As g;" && \
+        psql -d geocoder -c "SELECT g.rating, ST_X(geomout) As lon, ST_Y(geomout) As lat, (addy).* FROM geocode('1731 New Hampshire Avenue Northwest, Washington, DC 20010', 1) As g;" && \
         service postgresql stop
 
 
