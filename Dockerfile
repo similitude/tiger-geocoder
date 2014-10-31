@@ -1,4 +1,4 @@
-FROM postgis:2.1
+FROM orlade/postgis
 # Note: This is built from https://github.com/helmi03/docker-postgis.
 # The DockerHub build has an error.
 
